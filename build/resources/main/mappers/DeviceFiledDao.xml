@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zelot.dao.DeviceFiledDao">
+  <resultMap id="BaseResultMap" type="com.zelot.ModelDo.DeviceFiled">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="filed_key" jdbcType="VARCHAR" property="filedKey" />
+    <result column="filed_value" jdbcType="VARCHAR" property="filedValue" />
+    <result column="date_create" jdbcType="TIMESTAMP" property="dateCreate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dev_id, filed_key, filed_value, date_create
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device_filed
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByDevId" resultType="com.zelot.ModelDo.DeviceFiled">
+    select
+    <include refid="Base_Column_List" />
+    from device_filed
+    where dev_id = #{devId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from device_filed
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zelot.ModelDo.DeviceFiled" useGeneratedKeys="true">
+    insert into device_filed (dev_id, filed_key, filed_value, 
+      date_create)
+    values (#{devId,jdbcType=INTEGER}, #{filedKey,jdbcType=VARCHAR}, #{filedValue,jdbcType=VARCHAR}, 
+      #{dateCreate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zelot.ModelDo.DeviceFiled" useGeneratedKeys="true">
+    insert into device_filed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="filedKey != null">
+        filed_key,
+      </if>
+      <if test="filedValue != null">
+        filed_value,
+      </if>
+      <if test="dateCreate != null">
+        date_create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="filedKey != null">
+        #{filedKey,jdbcType=VARCHAR},
+      </if>
+      <if test="filedValue != null">
+        #{filedValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null">
+        #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zelot.ModelDo.DeviceFiled">
+    update device_filed
+    <set>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="filedKey != null">
+        filed_key = #{filedKey,jdbcType=VARCHAR},
+      </if>
+      <if test="filedValue != null">
+        filed_value = #{filedValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null">
+        date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zelot.ModelDo.DeviceFiled">
+    update device_filed
+    set dev_id = #{devId,jdbcType=INTEGER},
+      filed_key = #{filedKey,jdbcType=VARCHAR},
+      filed_value = #{filedValue,jdbcType=VARCHAR},
+      date_create = #{dateCreate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

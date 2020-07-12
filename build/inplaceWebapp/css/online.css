@@ -1,0 +1,41 @@
+body{
+	font-size: 16px;
+}
+.container{
+	width: 100%;
+	height: auto;
+}
+.devices {
+	width: 100%;
+	height: auto;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.device{
+	width: 800px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+.device .img-hover img {
+	width: 200px;
+	height: 200px;
+	border-radius: 20%;
+}
+.device .img-hover{
+	display: flex;
+	flex-direction: row-reverse;
+
+}
+.table{
+	width: 300px;
+
+}
+.modal-dialog{
+	transition:visibility 3s, opacity 3s;
+}
